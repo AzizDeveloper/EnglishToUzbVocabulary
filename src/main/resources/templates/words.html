@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="utf-8"/>
+  <title>Vocabulary</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <h1>Hello this is the english vocabulary website</h1>
+
+    <form class="align-middle" th:action="@{/add-word}" method="POST" th:object="${word}" >
+        <div class="input-group-prepend">
+            <input th:value="${englishWord}" name="englishWord" class="form-control" type="text"  placeholder="English word"
+                   aria-describedby="inputGroup-sizing-sm">
+            <input th:value="${uzbekWord}" name="uzbekWord" class="form-control" type="text"  placeholder="Uzbek word"
+                   aria-describedby="inputGroup-sizing-sm">
+            <input th:value="${sentence}" name="sentence" class="form-control" type="text"  placeholder="Sentence"
+                   aria-describedby="inputGroup-sizing-sm">
+            <button class="btn btn-secondary btn-sm" type="submit">Submit</button>
+        </div>
+    </form>
+
+<!--  <div>-->
+<!--    <tr>-->
+<!--      <td>-->
+<!--        <input type="text" id="new_word" required="" placeholder="New English word" value=""-->
+<!--               name="word" autocomplete="off" style="border-radius: 3px 0px 0px 3px;">-->
+<!--      </td>-->
+<!--      <td>-->
+<!--      <td>-->
+<!--        <input type="text" id="new_words_translate" required="" placeholder="word translate" value=""-->
+<!--               name="word" autocomplete="off" style="border-radius: 3px 0px 0px 3px;">-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <input type="text" id="new_word_sentence" required="" placeholder="New sentence" value=""-->
+<!--               name="word" autocomplete="off" style="border-radius: 3px 0px 0px 3px;">-->
+<!--      </td>-->
+<!--      <td>-->
+<!--        <input type="submit" class="submit" value="Submit" id="word_submit">-->
+<!--      </td>-->
+<!--    </tr>-->
+<!--  </div>-->
+
+<div>
+<!-- model bn bir List jo'nataman back-enddan va shu yerga table orqali foreach thymleaf bn chiqaraman (show)-->
+</div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+              <th>English</th>
+              <th>Uzbek</th>
+              <th>Sentence</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="word : ${words}">
+              <td th:text="${word.englishWord}"></td>
+              <td th:text="${word.uzbekWord}"></td>
+              <td th:text="${word.sentence}"></td>
+              <td>
+                    <a th:href="@{'/edit/' + ${word.id}} " th:text="Edit"/>
+                    <a th:href="@{'/delete-word/' +  ${word.id}}" th:text="Delete"/>
+              </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</body>
+</html>
